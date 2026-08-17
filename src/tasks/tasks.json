@@ -1,0 +1,67 @@
+{
+  "modes": {
+    "kitchen": {
+      "label": "Kitchen",
+      "seedGuides": [
+        {
+          "title": "One-Pot Jollof Rice",
+          "objectName": "tomatoes, onions, red pepper, rice",
+          "confidence": 0.92,
+          "steps": [
+            { "text": "Dice the onions and red pepper", "durationSeconds": 180, "checklist": ["onions diced", "pepper diced"] },
+            { "text": "Blend the tomatoes into a smooth paste", "durationSeconds": 240 },
+            { "text": "Fry onions until translucent, add blended tomatoes", "durationSeconds": 600, "checklist": ["oil hot", "tomatoes reduced"] },
+            { "text": "Add rice, stir to coat with the stew", "durationSeconds": 120 },
+            { "text": "Pour in broth, cover, and simmer on low", "durationSeconds": 480 },
+            { "text": "Rest 10 minutes covered, then fluff and serve", "durationSeconds": 600 }
+          ]
+        }
+      ]
+    },
+    "plant": {
+      "label": "Plant",
+      "seedGuides": [
+        {
+          "title": "Recover an Overwatered Plant",
+          "objectName": "wilting leaves, wet soil",
+          "confidence": 0.88,
+          "steps": [
+            { "text": "Stop watering immediately and move the plant out of direct sun", "checklist": ["plant relocated", "watering paused"] },
+            { "text": "Check the pot drainage holes are not blocked", "durationSeconds": 120 },
+            { "text": "If soil is waterlogged, gently remove excess water or repot with fresh mix", "durationSeconds": 600 },
+            { "text": "Remove any yellowed or rotting leaves", "durationSeconds": 300, "checklist": ["dead leaves removed"] },
+            { "text": "Wait until the top 2 inches of soil are dry before watering again", "durationSeconds": 604800 }
+          ]
+        }
+      ]
+    },
+    "fixit": {
+      "label": "Fix-it",
+      "seedGuides": [
+        {
+          "title": "Fix a Loose Bicycle Chain",
+          "objectName": "bicycle chain, rear derailleur",
+          "confidence": 0.9,
+          "steps": [
+            { "text": "Shift the chain onto the smallest rear sprocket", "checklist": ["chain on small sprocket"] },
+            { "text": "Loosen the rear axle nuts slightly", "durationSeconds": 120 },
+            { "text": "Pull the wheel back until the chain has about 2 cm of up-and-down play", "durationSeconds": 180, "checklist": ["chain play ~2 cm"] },
+            { "text": "Retighten the axle nuts and spin the wheel to confirm smooth pedaling" }
+          ]
+        }
+      ]
+    }
+  },
+  "taskGuideSchema": {
+    "title": "string",
+    "objectName": "string",
+    "confidence": "number 0..1",
+    "steps": [
+      {
+        "text": "string",
+        "durationSeconds": "number (optional)",
+        "checklist": ["string (optional)"]
+      }
+    ]
+  }
+}
