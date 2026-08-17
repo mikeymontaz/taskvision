@@ -1,15 +1,15 @@
 # TaskVision — Build Guide (Step-by-Step)
 
-This guide takes you from a fresh machine to a working TaskVision Lens, using CLAD for the heavy lifting. Designed for the phone-only builder running a cloud Windows PC via RDP.
+This guide is a proposed workflow from a fresh machine to a TaskVision Lens, using CLAD for implementation assistance. It is designed for a phone-only builder using a Windows machine through RDP. It does not claim that the Lens is working until each test gate produces evidence.
 
 ## Step 1 — Set Up the Build Machine
 
-On the cloud Windows PC (or any Windows 11 machine):
+On a compatible Windows machine, if you obtain one:
 
 1. Download and install **Lens Studio 5.22+** from https://ar.snap.com/download
 2. Open Lens Studio → Home → select **SPECS** → **Base Template** → File → Save As → `TaskVision`
 3. Install **Claude Code** (or Codex/Cursor) and sign in
-4. Follow the CLAD setup guide to connect the AI tool to the Lens Studio MCP server: https://developers.specs.com/docs/clad/setup/setup-ai/claude-code-setup
+4. Follow the current official CLAD setup documentation for your exact Lens Studio version. The previously used `developers.specs.com` URL must be checked against the current official Snap developer documentation before use.
 5. In Project Settings, enable **Allow Experimental API** (needed for camera + internet together)
 
 On your phone: install an RDP/remote desktop client (e.g., Microsoft Remote Desktop, RustDesk, or the cloud provider's own app) and connect to the cloud PC.
@@ -26,15 +26,15 @@ The relay is a small Python service that receives the captured frame and returns
 python scripts/vision_relay.py
 ```
 
-It expects an environment variable `AI_SERVICE_URL` (or an OpenAI-compatible key) and exposes `POST /analyze` taking `{ "mode": "...", "frame_base64": "..." }`. Swap in any vision-capable model (GPT-4o, Gemini, Claude with vision). Host it on any always-on host with a public HTTPS URL — the relay is what makes the Lens smart.
+The starter relay expects `AI_SERVICE_URL` and `AI_API_KEY`, and exposes `POST /analyze` with `{ "mode": "...", "frame_base64": "..." }`. This code has not been connected to a real Lens or a live model in this repository. Before using it, validate the provider’s current API format, configure authentication privately, add HTTPS, and test with a non-sensitive sample image.
 
 ## Step 4 — Configure the Endpoint
 
-In the Lens project settings JSON, set `relayEndpoint` to your relay's HTTPS URL. Test the full loop in the SPECS simulator: mode select → capture (mocked frame in simulator) → response → step rendering → timer → completion.
+Only after the relay and Lens integration are implemented should you configure the endpoint. First test the relay independently with a seed response, then test the Lens UI with a mocked response if the target simulator supports it, and finally test camera/network behavior on the intended device or approved environment. Record each result.
 
 ## Step 5 — The Closed Loop Pass
 
-Run Prompt 10 (test loop). Let CLAD iterate until zero console errors. This pass is the most important artifact for judging — it is the literal "Loop" in Closed Loop Agentic Development.
+Run Prompt 10 only after the preceding prompts have actually been executed. Capture the console output, screenshots, generated project files, and dated CLAD transcript. Only report zero errors if the evidence supports that result.
 
 ## Step 6 — Record the Demo Video
 
@@ -54,10 +54,10 @@ Fill the submission form at https://lenslist.co/clad-summer-hackathon with:
 | Repo link | https://github.com/mikeymontaz/taskvision |
 | Video link | your Drive/WeTransfer link |
 | Prompt log link | https://github.com/mikeymontaz/taskvision/blob/main/prompt_log.md |
-| Description | the pitch below |
+| Description | Use the verified description below only after the Lens is actually built and tested |
 
 ## Project Description (paste into form)
 
-> TaskVision is a vision-in-the-loop spatial experience for SPECS that turns "what do I do with this?" into a guided, hands-free workflow. Point your glasses at something real — ingredients on your counter, a wilting plant, a broken bike chain — tap to capture, and TaskVision's AI pipeline identifies the object and generates a step-by-step spatial guide rendered as world-locked cards in your field of view. Steps advance with palm-tap gestures, each step can carry a countdown timer and checklist, and progress persists through Snap Cloud so a paused task resumes exactly where you left off. It was built end-to-end with CLAD in Lens Studio: the prompt log documents the full closed loop, from scaffold through the vision relay integration to the final test-and-fix pass that landed on zero simulator errors. Built by Michael Ikwuka (@mikeymontaz) for the CLAD Summer Hackathon, Week 2: Guide.
+> TaskVision is a proposed vision-in-the-loop spatial experience for SPECS that aims to turn "what do I do with this?" into a guided, hands-free workflow. The current public repository contains the concept, implementation plan, seed task content, and a starter relay; Lens Studio execution, CLAD evidence, permissions, device/simulator testing, and final submission assets are still being completed. Built by Michael Ikwuka (@mikeymontaz).
 
-**Deadline: Sunday, Aug 23, 2026, night (PT). Submit before then. Good luck.**
+**Deadline:** verify the current date and deadline directly on the official Lenslist submission page before submitting; earlier materials in this repository contain an unverified deadline and should not be relied upon.

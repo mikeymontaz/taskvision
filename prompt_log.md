@@ -1,6 +1,6 @@
 # CLAD Prompt Log — TaskVision
 
-This is the complete development log of prompts used with CLAD (Claude Code connected to the Lens Studio MCP server, SPECS project, Lens Studio 5.22+). Prompts are recorded verbatim, in execution order, with development notes. This log demonstrates the closed loop: **prompt → build → test → fix → refine**.
+This is a proposed, ordered CLAD workflow for TaskVision. The prompts are ready to run in the real Lens Studio environment. Until dated CLAD outputs, project files, screenshots, and test logs are added, this document is a plan rather than evidence of completed execution.
 
 ---
 
@@ -9,19 +9,19 @@ This is the complete development log of prompts used with CLAD (Claude Code conn
 **Prompt 1 (scaffold):**
 > Create a SPECS Lens Studio project called TaskVision using the SPECS Base Template. Set up a world-locked spatial UI layer using the Spectacles UI Kit: a translucent glass-style main panel floating ahead of the user, a compact title bar reading "TaskVision", and a radial mode selector with three modes: "Kitchen", "Plant", "Fix-it". Add a crosshair reticle at center view that highlights when an object could be identified.
 
-**Notes:** Established the visual identity (glass-morphism, dark translucent panels for outdoor legibility) and the three-mode structure. CLAD created the project, installed UI Kit, and wired the mode selector.
+**Expected result:** Establish the visual identity and three-mode structure. Record the actual CLAD response, generated files, and any setup errors after running this prompt.
 
 ## Phase 2 — Vision Pipeline
 
 **Prompt 2 (camera capture):**
 > Add a camera capture system using CameraModule. On a palm-tap gesture (Interaction Kit), capture a still image frame from the default color camera and store it. Show a brief "capturing..." indicator on the reticle while the capture completes.
 
-**Notes:** Still image requests only complete on the device, so CLAD scaffolded the module and flagged device-only behavior; simulator testing used a mocked frame texture.
+**Verification note:** Camera behavior and simulator support must be confirmed in the target Lens Studio/Spectacles version. Do not claim device or mock testing until a real test log is captured.
 
 **Prompt 3 (vision relay):**
 > Add an InternetModule that POSTs the captured frame (base64) plus the selected mode to a vision relay endpoint (make the endpoint URL configurable in a settings JSON). Parse the JSON response into a TaskGuide object: { title, objectName, confidence, steps: [{ text, durationSeconds?, checklist: string[]? }] }. While waiting for the response, show a "Analyzing..." panel with a subtle pulse animation.
 
-**Notes:** Privacy constraint documented: enabling internet disables camera/location in public Lenses, so TaskVision targets the experimental workflow (camera + internet together via Extended Permissions), which is valid for this hackathon. The relay service (scripts/vision_relay.py) is included in the repo.
+**Verification note:** Camera access, internet access, permissions, and public-Lens eligibility are environment-dependent. Confirm them against the official documentation and event rules before implementation. The relay in `scripts/vision_relay.py` is a starter example, not a verified production integration.
 
 ## Phase 3 — Task Rendering
 
@@ -52,7 +52,7 @@ This is the complete development log of prompts used with CLAD (Claude Code conn
 **Prompt 10 (test loop):**
 > Run the Lens in the SPECS simulator. Capture all console errors and warnings. Fix them until the full flow works end to end with zero errors: mode select → capture → simulated analysis response → step rendering → timer → persistence restore → completion VFX. Report everything you fixed.
 
-**Result of the loop:** CLAD found and fixed a script update-order bug where the capture indicator hid before the response parser initialized, a UI Kit panel layering issue where checklist toggles overlapped step text on narrow viewports, and an unhandled null case when the relay returned an empty steps array. All fixes verified in a second simulator pass.
+**Verification status:** Not yet executed. The repository currently contains no Lens Studio project export, CLAD transcript, simulator recording, console log, or dated second-pass evidence. After running this prompt, append the actual errors, fixes, screenshots, and final result here. Do not claim zero errors without that evidence.
 
 ---
 

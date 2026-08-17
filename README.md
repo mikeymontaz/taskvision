@@ -2,13 +2,13 @@
 
 > **The Lens that sees your world and guides your hands.**
 
-TaskVision is a SPECS spatial experience built for the **CLAD Summer Hackathon — Week 2: "Guide"** ([lenslist.co/clad-summer-hackathon](https://lenslist.co/clad-summer-hackathon)), developed with **CLAD (Closed Loop Agentic Development) in Lens Studio**.
+TaskVision is a proposed SPECS spatial experience for the **CLAD Summer Hackathon — "Guide"** ([official event page](https://lenslist.co/clad-summer-hackathon)). This repository is a build scaffold and implementation plan; actual CLAD and Lens Studio execution must be completed and documented before describing the Lens as finished.
 
 Look at something real, tap, and the glasses figure out what it is — then generate a live, step-by-step spatial guide floating in your field of view to help you complete a real-world task with it. No phone, no search, no decisions. Your glasses see the problem and stream the solution.
 
 ## How It Works
 
-The experience runs a vision-in-the-loop pipeline: the SPECS **CameraModule** captures what the user is looking at, the frame is sent to an AI vision service through the **InternetModule (Fetch API)** and a lightweight relay, the response (identified object + generated task plan) comes back as structured JSON, and a **world-locked spatial UI** renders the step-by-step guide directly over the real world. Steps advance hands-free via **Interaction Kit** gestures, and progress persists through **Snap Cloud** so a paused task resumes exactly where it left off.
+The planned experience uses a vision-in-the-loop pipeline: the SPECS **CameraModule** may capture the current camera frame, an approved network path may send it to an AI service, structured JSON may return, and a spatial UI may render the guide. Camera, internet, permissions, public-Lens eligibility, Interaction Kit behavior, and persistence must be verified in the target Lens Studio/Spectacles environment before implementation claims are made.
 
 | Layer | Technology |
 |---|---|
@@ -47,10 +47,10 @@ The theme asks for *"a spatial experience that guides people to learn, complete,
 
 ## CLAD Prompt Log
 
-The full development prompt log — the actual prompts used with CLAD to scaffold, build, iterate, and test this project — lives in `prompt_log.md`. It documents the closed loop in action: prompt → build → test → fix → refine.
+The development prompt log in `prompt_log.md` is an ordered CLAD workflow template for scaffolding, building, iterating, and testing this project. It is not evidence that these prompts have already been executed; add dated CLAD outputs, screenshots, and test results after each real build session.
 
 ## Author
 
 **Michael Ikwuka (@mikeymontaz)** — Snapchat, TikTok, Instagram, Discord
 
-*Built with CLAD in Lens Studio. No Spectacles hardware required to develop.*
+*Designed for CLAD in Lens Studio. Lens Studio execution, device/simulator testing, and final CLAD evidence remain pending.*
